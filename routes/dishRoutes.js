@@ -39,3 +39,20 @@ router.post('/', async (req, res) => {
         res.status(500).json({ message: 'Internal Server Error' });
     }
 });
+router.put('/:id', async (req, res) => {
+    try {
+        console.log('Request ID:', req.params.id);
+        console.log('Request Body:', req.body);
+
+        const updatedDish = await Dish.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        if (updatedDish) {
+            res.status(200).json(updatedDish);
+        } else {
+            res.status(404).json({ message: 'Dish not found' });
+        }
+    } catch (error) {
+        console.error('Error updating dish:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+;
