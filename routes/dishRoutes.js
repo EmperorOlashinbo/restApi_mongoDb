@@ -23,3 +23,19 @@ router.get('/:name', async (req, res) => {
         res.status(500).json({ message: 'Internal Server Error' });
     }
 });
+router.post('/', async (req, res) => {
+    const { name, ingredients, preparationsSteps, cookingTime, origin, spiceLevel } = req.body;
+    if (!name || !ingredients || !preparationsSteps || !cookingTime || !origin || !spiceLevel) {
+        return res.status(400).json({ message: 'All fields are required' });
+    }
+    try {
+        const newDish = new Dish(req.body);
+        await newDish.save();
+        res.status(201).json({ message: 'Dish created successfully', dish: newDish });
+    } catch (error) {
+        if (error.code === 11000) {
+            return res.status(409).json({ message: 'Dish already exists' });
+        }
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
