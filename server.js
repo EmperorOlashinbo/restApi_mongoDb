@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const dishRoutes = require('./routes/dishRoutes');
 
 
 const app = express();
@@ -17,6 +18,7 @@ app.use((err, req, res, next) => {
     next(err);
 });
 
+app.use('/api/dishes', dishRoutes)
 
 let server;
 
