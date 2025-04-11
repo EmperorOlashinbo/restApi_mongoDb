@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe App</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOM8d7j3z2l1e4c5e5b5e5b5e5b5e5b5e5b5b5" crossorigin="anonymous">
+</head>
+<body>
+    <h1>Recipe App</h1>
+    <main>
+        <table id="dishesTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Ingredients</th>
+                    <th>Preparation Steps</th>
+                    <th>Cooking Time</th>
+                    <th>Origin</th>
+                    <th>Spice Level</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+        <form id="addDishForm">
+            <h2>Add a New Dish</h2>
+            <input type="text" id="name" placeholder="Dish Name" required>
+            <input type="text" id="ingredients" placeholder="Ingredients" required>
+            <input type="text" id="preparationsSteps" placeholder="Preparation Steps" required>
+            <input type="text" id="cookingTime" placeholder="Cooking Time" required>
+            <input type="text" id="origin" placeholder="Origin" required>
+            <input type="text" id="spiceLevel" placeholder="Spice Level" required>
+            <button type="submit">Add Dish</button>
+        </form>
+    </main>
+    <script src="app.js"></script>
+</body>
+</html>
