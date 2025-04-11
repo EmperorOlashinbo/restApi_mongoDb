@@ -1,0 +1,26 @@
+{
+  "name": "restapi_mongodb",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/EmperorOlashinbo/restApi_mongoDb#readme",
+  "bugs": {
+    "url": "https://github.com/EmperorOlashinbo/restApi_mongoDb/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EmperorOlashinbo/restApi_mongoDb.git"
+  },
+  "license": "ISC",
+  "author": "Ibrahim",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "mongoose": "^8.13.2"
+  }
+}
