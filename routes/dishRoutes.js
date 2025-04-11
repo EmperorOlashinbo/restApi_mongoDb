@@ -71,3 +71,18 @@ router.patch('/:id', async (req, res) => {
         res.status(500).json({ message: 'Internal Server Error' });
     }
 });
+router.delete('/:id', async (req, res) => {
+    try {
+        const dish = await Dish.findByIdAndDelete(req.params.id);
+        if (dish) {
+            res.status(200).json({ message: 'Dish deleted successfully' });
+        } else {
+            res.status(404).json({ message: 'Dish not found' });
+        }
+    } catch (error) {
+        console.error('Error deleting dish:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
+module.exports = router;
