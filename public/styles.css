@@ -26,3 +26,12 @@ main {
     margin: 0 auto;
     height: calc(100vh - 100px); /* Adjust height to fit the viewport */
 }
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    height: 100%;
+}
