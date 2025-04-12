@@ -9,3 +9,10 @@ body {
   grid-template-rows: 3fr 1fr;
   height: 100vh;
 }
+
+h1 {
+    text-align: center;
+    font-size: 2.5em;
+    margin: 20px 0;
+    color: #444;
+}
