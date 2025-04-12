@@ -92,5 +92,40 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('Error adding dish');
         }
     })
-    
+
+    window.editDish = async (id) => {
+        const newName = prompt('Enter new name for the dish:');
+        const newIngredients = prompt('Enter new ingredients (comma separated):');
+        const newPreparationsSteps = prompt('Enter new preparation steps (comma separated):');
+        const newCookingTime = prompt('Enter new cooking time:');
+        const newOrigin = prompt('Enter new origin:')
+        const newSpiceLevel = prompt('Enter new spice level:');
+
+        try {
+            const response = await fetch(`${API_BASE_URL}/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: newName,
+                    ingredients: newIngredients.split(',').map(item => item.trim()),
+                    preparationsSteps: newPreparationsSteps.split(',').map(item => item.trim()),
+                    cookingTime: newCookingTime,
+                    origin: newOrigin,
+                    spiceLevel: newSpiceLevel
+                })
+            });
+            if (response.ok) {
+                alert('Dish updated successfully!');
+                fetchDishes();
+            } else {
+                const errorData = await response.json();
+                alert('Error updating dish: ' + errorData.message);
+            }
+        } catch (error) {
+            console.error('Error updating dish:', error);
+            alert('Error updating dish');
+        }
+    }
         
