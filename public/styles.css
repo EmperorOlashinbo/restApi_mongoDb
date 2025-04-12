@@ -16,3 +16,13 @@ h1 {
     margin: 20px 0;
     color: #444;
 }
+
+/* Main Layout */
+main {
+    display: grid;
+    grid-template-columns: 3fr 1fr; /* dishesTable takes 3fr, addDishForm takes 1fr */
+    gap: 20px;
+    width: 90%;
+    margin: 0 auto;
+    height: calc(100vh - 100px); /* Adjust height to fit the viewport */
+}
