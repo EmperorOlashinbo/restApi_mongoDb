@@ -35,3 +35,35 @@ table {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     height: 100%;
 }
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #f4f4f4;
+    color: #333;
+}
+  
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+  
+  tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Form Styles */
+form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    height: fit-content;
+    align-self: start; /* Align the form to the top */
+}
