@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     })
 
-    window.editDish = async (id) => {
+    window.editDish = async (_id) => {
         const newName = prompt('Enter new name for the dish:');
         const newIngredients = prompt('Enter new ingredients (comma separated):');
         const newPreparationsSteps = prompt('Enter new preparation steps (comma separated):');
@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const newSpiceLevel = prompt('Enter new spice level:');
 
         try {
-            const response = await fetch(`${API_BASE_URL}/${id}`, {
+            const response = await fetch(`${API_BASE_URL}/${_id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -128,4 +128,25 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('Error updating dish');
         }
     }
-        
+
+    window.deleteDish = async (_id) => {
+        if (confirm('Are you sure you want to delete this dish?')) {
+            try {
+                const response = await fetch(`${API_BASE_URL}/${_id}`, {
+                    method: 'DELETE'
+                });
+                if (response.ok) {
+                    alert('Dish deleted successfully!');
+                    fetchDishes();
+                } else {
+                    const errorData = await response.json();
+                    alert('Error deleting dish: ' + errorData.message);
+                }
+            } catch (error) {
+                console.error('Error deleting dish:', error);
+                alert('Error deleting dish');
+            }
+        }
+    }
+    fetchDishes();
+})
