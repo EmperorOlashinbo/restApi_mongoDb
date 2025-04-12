@@ -1,92 +1,152 @@
 /* General Styles */
+/* Style the body element for overall page appearance */
 body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f9f9f9;
-  color: #333;
-  display: grid;
-  grid-template-rows: 3fr 1fr;
-  height: 100vh;
+    * Set a clean, readable font */
+    font-family: Arial, sans-serif;
+    /* Remove default margins and padding */
+    margin: 0;
+    padding: 0;
+    /* Apply a light gray background color */
+    background-color: #f9f9f9;
+    /* Set the default text color to a dark gray */
+    color: #333;
+    /* Use CSS grid to organize content in two rows */
+    display: grid;
+    grid-template-rows: 3fr 1fr;
+    /* Ensure the body takes up the full viewport height */
+    height: 100vh;
 }
-
+  
+/* Style the main heading */
 h1 {
+    /* Center the text horizontally */
     text-align: center;
+    /* Set a large font size for prominence */
     font-size: 2.5em;
+    /* Add vertical spacing */
     margin: 20px 0;
+    /* Use a darker gray for the heading color */
     color: #444;
 }
-
+  
 /* Main Layout */
-main {
+  /* Style the main content container */
+  main {
+    /* Use CSS grid to create a two-column layout */
     display: grid;
-    grid-template-columns: 3fr 1fr; /* dishesTable takes 3fr, addDishForm takes 1fr */
+    /* Allocate 3 parts to the table and 1 part to the form */
+    grid-template-columns: 3fr 1fr;
+    /* Add spacing between grid items */
     gap: 20px;
+    /* Set the width to 90% of the parent container */
     width: 90%;
+    /* Center the main content horizontally */
     margin: 0 auto;
-    height: calc(100vh - 100px); /* Adjust height to fit the viewport */
+    /* Adjust height to account for heading and margins */
+    height: calc(100vh - 100px);
 }
-
+  
 /* Table Styles */
-table {
+  /* Style the table element */
+  table {
+    /* Ensure the table takes up the full width of its container */
     width: 100%;
+    /* Collapse borders to avoid double lines */
     border-collapse: collapse;
+    /* Apply a white background for the table */
     background-color: #fff;
+    /* Add a subtle shadow for depth */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* Ensure the table fills its grid area */
     height: 100%;
 }
 
+/* Style table headers and cells */
 th, td {
+    /* Add padding for better readability */
     padding: 10px;
+    /* Align text to the left */
     text-align: left;
+    /* Add a light border to separate cells */
     border: 1px solid #ddd;
 }
 
+/* Style table headers specifically */
 th {
+    /* Use a light gray background for headers */
     background-color: #f4f4f4;
+    /* Set text color to a dark gray */
     color: #333;
 }
-  
-  tr:nth-child(even) {
+
+/* Style even-numbered table rows */
+tr:nth-child(even) {
+    /* Apply a light gray background for alternating rows */
     background-color: #f9f9f9;
 }
-  
-  tr:hover {
+
+/* Style table rows on hover */
+tr:hover {
+    /* Highlight rows with a slightly darker gray on hover */
     background-color: #f1f1f1;
 }
-
+  
 /* Form Styles */
+/* Style the form element */
 form {
+    /* Use CSS grid for form layout */
     display: grid;
+    /* Arrange form elements in a single column */
     grid-template-columns: 1fr;
+    /* Add spacing between form fields */
     gap: 15px;
+    /* Add padding inside the form */
     padding: 20px;
+    /* Apply a white background */
     background-color: #fff;
+    /* Add a subtle shadow for depth */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* Round the form corners */
     border-radius: 5px;
+    /* Allow the form to size based on its content */
     height: fit-content;
-    align-self: start; /* Align the form to the top */
-}
-
-form input[type="text"],
-button {
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-}
-
-button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-    width: 100%;
-    margin: 5px;
-    
+    /* Align the form to the top of its grid cell */
+    align-self: start;
 }
   
+/* Style text inputs and buttons */
+form input[type="text"],
+button {
+  /* Add padding for better appearance */
+  padding: 10px;
+  /* Apply a light border */
+  border: 1px solid #ddd;
+  /* Round the corners */
+  border-radius: 5px;
+}
+  
+/* Style buttons specifically */
+button {
+    /* Set a blue background color */
+    background-color: #007bff;
+    /* Use white text for contrast */
+    color: #fff;
+    /* Remove the default border */
+    border: none;
+    /* Make the cursor a pointer on hover */
+    cursor: pointer;
+    /* Set a readable font size */
+    font-size: 16px;
+    /* Add a smooth transition for hover effects */
+    transition: background-color 0.3s ease;
+    /* Ensure buttons take up full width */
+    width: 100%;
+    /* Add small vertical spacing */
+    margin: 5px;
+}
+  
+/* Style buttons on hover */
 button:hover {
+    /* Darken the background color on hover */
     background-color: #0056b3;
 }
