@@ -60,3 +60,37 @@ document.addEventListener('DOMContentLoaded', () => {
             dishesTableBody.appendChild(row);
         })
     }
+    addDishForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const formData = new FormData(addDishForm)
+        const newDish = Object.fromEntries(formData)
+
+        newDish.ingredients = newDish.ingredients.split(',').map(item => item.trim());
+        newDish.preparationsSteps = newDish.preparationsSteps.split(',').map(item => item.trim());
+
+        try {
+            const response = await fetch(API_BASE_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newDish)
+            });
+            if (response.ok) {
+                alert('Dish added successfully!');
+                fetchDishes();
+                addDishForm.reset();
+            } else if (response.status === 409) {
+                alert('Dish already exists!');
+            } else {
+                const errorData = await response.json();
+                alert('Error adding dish: ' + errorData.message);
+            }
+        } catch (error) {
+            console.error('Error adding dish:', error);
+            alert('Error adding dish');
+        }
+    })
+    
+        
