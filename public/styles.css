@@ -67,3 +67,26 @@ form {
     height: fit-content;
     align-self: start; /* Align the form to the top */
 }
+
+form input[type="text"],
+button {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    margin: 5px;
+    
+}
+  
+button:hover {
+    background-color: #0056b3;
+}
