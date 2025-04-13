@@ -1,146 +1,110 @@
-// Import the Express framework
-const express = require('express');
-// Initialize an Express router instance
-const router = express.Router();
-// Import the Dish model for MongoDB interactions
-const Dish = require('../models/Dish');
+// Import required modules
+const express = require('express'); // Express framework for creating routes
+const router = express.Router(); // Router instance for defining routes
+const Dish = require('../models/Dish'); // Mongoose model for the Dish collection
 
-// GET route to retrieve all dishes
+// Route to get all dishes
 router.get('/', async (req, res) => {
   try {
-    // Fetch all dishes from the database
-    const dishes = await Dish.find();
-    // Send the list of dishes as a JSON response
-    res.json(dishes);
+    const dishes = await Dish.find(); // Fetch all dishes from the database
+    res.json(dishes); // Send the dishes as a JSON response
   } catch (error) {
-    // Handle any errors and return a 500 status with error details
-    res.status(500).json({ message: 'Internal server error', error: error.message });
+    res.status(500).json({ message: 'Internal server error', error: error.message }); // Handle errors
   }
 });
 
-// GET route to retrieve a dish by name
+// Route to get a dish by name
 router.get('/:name', async (req, res) => {
   try {
-    // Find a dish by name from the URL parameter
-    const dish = await Dish.findOne({ name: req.params.name });
+    const dish = await Dish.findOne({ name: req.params.name }); // Find a dish by its name
     if (dish) {
-      // If found, return the dish as a JSON response
-      res.json(dish);
+      res.json(dish); // Send the dish as a JSON response
     } else {
-      // If not found, return a 404 status with an error message
-      res.status(404).json({ message: 'Dish not found' });
+      res.status(404).json({ message: 'Dish not found' }); // Send a 404 if the dish is not found
     }
   } catch (error) {
-    // Handle any errors and return a 500 status with error details
-    res.status(500).json({ message: 'Internal server error', error: error.message });
+    res.status(500).json({ message: 'Internal server error', error: error.message }); // Handle errors
   }
 });
 
-// POST route to create a new dish
+// Route to add a new dish
 router.post('/', async (req, res) => {
   // Validate request body
   const { name, ingredients, preparationSteps, cookingTime, origin, spiceLevel } = req.body;
-  // Check if all required fields are provided
   if (!name || !ingredients || !preparationSteps || !cookingTime || !origin || !spiceLevel) {
-    // Return a 400 status if any field is missing
-    return res.status(400).json({ message: 'All fields are required' });
+    return res.status(400).json({ message: 'All fields are required' }); // Return 400 if any field is missing
   }
   try {
-    // Create a new dish instance with the request body
-    const newDish = new Dish(req.body);
-    // Save the dish to the database
-    await newDish.save();
-    // Return a 201 status with a success message
-    res.status(201).json({ message: 'Dish added successfully' });
+    const newDish = new Dish(req.body); // Create a new dish instance
+    await newDish.save(); // Save the dish to the database
+    res.status(201).json({ message: 'Dish added successfully' }); // Send a success response
   } catch (error) {
-    // Check for duplicate key error (MongoDB error code 11000)
     if (error.code === 11000) {
-      // Return a 409 status if the dish already exists
-      res.status(409).json({ message: 'Dish already exists' });
+      res.status(409).json({ message: 'Dish already exists' }); // Handle duplicate dish names
     } else {
-      // Handle other errors with a 500 status and error details
-      res.status(500).json({ message: 'Internal server error', error: error.message });
+      res.status(500).json({ message: 'Internal server error', error: error.message }); // Handle other errors
     }
   }
 });
 
-// PUT route to update a dish by ID
+// Route to update a dish (replace all fields)
 router.put('/:id', async (req, res) => {
   try {
-    // Log the ID from the URL parameter for debugging
-    console.log('Request ID:', req.params.id);
-    // Log the request body for debugging
-    console.log('Request Body:', req.body);
+    console.log('Request ID:', req.params.id); // Log the ID
+    console.log('Request Body:', req.body); // Log the request body
 
-    // Find and update the dish by ID, replacing with the request body
-    const updatedDish = await Dish.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    const updatedDish = await Dish.findByIdAndUpdate(req.params.id, req.body, { new: true }); // Update the dish
     if (updatedDish) {
-      // If updated, return the updated dish with a 200 status
-      res.status(200).json(updatedDish);
+      res.status(200).json(updatedDish); // Send the updated dish as a JSON response
     } else {
-      // If not found, return a 404 status with an error message
-      res.status(404).json({ message: 'Dish not found' });
+      res.status(404).json({ message: 'Dish not found' }); // Send a 404 if the dish is not found
     }
   } catch (error) {
-    // Log the error for debugging
-    console.error('Error updating dish:', error);
-    // Handle any errors with a 500 status and error details
-    res.status(500).json({ message: 'Internal server error', error: error.message });
+    console.error('Error updating dish:', error); // Log the error
+    res.status(500).json({ message: 'Internal server error', error: error.message }); // Handle errors
   }
 });
 
-// PATCH route to partially update a dish by ID
+// Route to partially update a dish (update specific fields)
 router.patch('/:id', async (req, res) => {
   try {
-    // Log the ID from the URL parameter for debugging
-    console.log('Request ID:', req.params.id);
-    // Log the request body for debugging
-    console.log('Request Body:', req.body);
+    console.log('Request ID:', req.params.id); // Log the ID
+    console.log('Request Body:', req.body); // Log the request body
 
     // Use $set to update only the provided fields
     const updatedDish = await Dish.findByIdAndUpdate(
       req.params.id,
-      { $set: req.body }, // Only update fields provided in the request body
+      { $set: req.body }, // Only update the fields provided in req.body
       { new: true } // Return the updated document
     );
 
     if (updatedDish) {
-      // If updated, return the updated dish with a 200 status
-      res.status(200).json(updatedDish);
+      res.status(200).json(updatedDish); // Send the updated dish as a JSON response
     } else {
-      // If not found, return a 404 status with an error message
-      res.status(404).json({ message: 'Dish not found' });
+      res.status(404).json({ message: 'Dish not found' }); // Send a 404 if the dish is not found
     }
   } catch (error) {
-    // Log the error for debugging
-    console.error('Error updating dish:', error);
-    // Handle any errors with a 500 status and error details
-    res.status(500).json({ message: 'Internal server error', error: error.message });
+    console.error('Error updating dish:', error); // Log the error
+    res.status(500).json({ message: 'Internal server error', error: error.message }); // Handle errors
   }
 });
 
-// DELETE route to remove a dish by ID
+// Route to delete a dish by ID
 router.delete('/:id', async (req, res) => {
   try {
-    // Log the ID from the URL parameter for debugging
-    console.log('Request ID:', req.params.id);
+    console.log('Request ID:', req.params.id); // Log the ID
 
-    // Find and delete the dish by ID
-    const dish = await Dish.findByIdAndDelete(req.params.id);
+    const dish = await Dish.findByIdAndDelete(req.params.id); // Delete the dish by ID
     if (dish) {
-      // If deleted, return a 200 status with a success message
-      res.status(200).json({ message: 'Dish deleted successfully' });
+      res.status(200).json({ message: 'Dish deleted successfully' }); // Send a success response
     } else {
-      // If not found, return a 404 status with an error message
-      res.status(404).json({ message: 'Dish not found' });
+      res.status(404).json({ message: 'Dish not found' }); // Send a 404 if the dish is not found
     }
   } catch (error) {
-    // Log the error for debugging
-    console.error('Error deleting dish:', error);
-    // Handle any errors with a 500 status and error details
-    res.status(500).json({ message: 'Internal server error', error: error.message });
+    console.error('Error deleting dish:', error); // Log the error
+    res.status(500).json({ message: 'Internal server error', error: error.message }); // Handle errors
   }
 });
 
-// Export the router to be used in the main application
+// Export the router to be used in other parts of the application
 module.exports = router;
