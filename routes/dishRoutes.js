@@ -27,6 +27,19 @@ router.get('/:name', async (req, res) => {
   }
 });
 
+router.get('/id/:id', async (req, res) => {
+  try {
+    const dish = await Dish.findById(req.params.id); // Find a dish by its ID
+    if (dish) {
+      res.json(dish); // Send the dish as a JSON response
+    } else {
+      res.status(404).json({ message: 'Dish not found' }); // Send a 404 if the dish is not found
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'Internal server error', error: error.message }); // Handle errors
+  }
+});
+
 // Route to add a new dish
 router.post('/', async (req, res) => {
   // Validate request body

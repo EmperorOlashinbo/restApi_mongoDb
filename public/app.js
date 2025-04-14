@@ -1,7 +1,7 @@
 // Wait for the DOM to fully load before executing the script
 document.addEventListener('DOMContentLoaded', () => {
     const dishesTableBody = document.querySelector('#dishesTable tbody'); // Table body for displaying dishes
-    const addDishForm = document.querySelector('#addDishForm'); // Form for adding a new dish
+    const addDishForm = document.querySelector('#addDishForm'); // Form for adding a new dish 
 
     const API_BASE_URL = 'http://localhost:5000/api/dishes'; // Base URL for the API
 
